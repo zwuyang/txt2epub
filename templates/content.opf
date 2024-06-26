@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookID" version="3.0">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:title>{{ book_name }}</dc:title>
+    <dc:creator opf:role="aut">{{ author }}</dc:creator>
+    <dc:language>zh-CN</dc:language>
+  </metadata>
+  <manifest>
+    {% for title, c in items %}
+    <item id="chap_{{ loop.index }}" href="text/chap{{ loop.index }}.html" media-type="application/xhtml+xml"/>
+    {% endfor %}
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
+    <item id="style" href="style.css" media-type="text/css"/>
+  </manifest>
+  <spine toc="ncx">
+    {% for title, c in items %}
+    <itemref idref="chap_{{ loop.index }}"/>
+    {% endfor %}
+  </spine>
+</package>
